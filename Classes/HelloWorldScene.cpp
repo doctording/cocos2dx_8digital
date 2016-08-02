@@ -376,11 +376,17 @@ void HelloWorld::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event *e
 	{
 		MessageBox("you win", "GameOver");
 	}
-
+	dirs.clear();
 }
 
 void HelloWorld::change(Datanum* sp1, Datanum* sp2)
 {
+	int pos1 = sp1->x * 3 + sp1->y;
+	int pos2 = sp2->x * 3 + sp2->y;
+	inits[pos1] = (char)sp2->no + '0';
+	inits[pos2] = (char)sp1->no + '0';
+
+
 	auto frameName1 = __String::createWithFormat("%d.png", sp2->no);
 	std::string picPath1 = frameName1->getCString();
 
@@ -447,6 +453,7 @@ void HelloWorld::menuAstarCallback(Ref* pSender)
 	{
 		dirs.push_back(aStar.rs[i] - aStar.rs[i - 1]); // -1 1 -3 3
 	}
+	aStar.rs.clear();
 
 	// 开始自己移动
 	MessageBox("please watch the moves", "confirm to start");
